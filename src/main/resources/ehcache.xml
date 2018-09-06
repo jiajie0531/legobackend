@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+    <!-- 指定一个文件目录，当EHCache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
+    <diskStore path="java.io.tmpdir/EHCACHE"/>
+    <cache name="resources" eternal="false" maxEntriesLocalHeap="100"
+           timeToIdleSeconds="600"></cache>
+    <!-- eternal：true表示对象永不过期，此时会忽略timeToIdleSeconds和 timeToLiveSeconds属性，默认为false -->
+    <!-- maxEntriesLocalHeap：堆内存中最大缓存对象数，0没有限制 -->
+
+    <!-- timeToIdleSeconds： 设定允许对象处于空闲状态的最长时间，以秒为 单位。当对象自从最近一次被访问后，如果处于空闲状态的时间超过了
+        timeToIdleSeconds属性值，这个对象就会过期，EHCache将把它从缓存中清空。 只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以
+        无限期地处于空闲状态 -->
+</ehcache>

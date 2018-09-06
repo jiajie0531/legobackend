@@ -1,0 +1,93 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: online_user
+      password: V3nj87*$Ry&p
+      url: jdbc:mysql://localhost:3306/thankoil?useUnicode=true&characterEncoding=utf8&useSSL=false
+
+      initial-size: 3
+      max-active: 20
+      min-idle: 3
+      max-wait: 150000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 600000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filter:
+        stat:
+          slow-sql-millis: 2000
+        wall:
+          enabled: true
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  #设置文件上传大小
+  http:
+    multipart:
+      max-request-size: 10Mb
+      max-file-size: 10Mb
+
+server:
+    port: 9001
+    tomcat:
+      basedir: /data/temp
+
+notice:
+  server:
+    url: https://api.mysubmail.com
+  message:
+    appKey: 14552
+    secret: ac4aa586537499a7e2df1fcc1fde10fb
+    expireTime: 15    #验证码过期时间，单位为分钟
+
+
+jwt:
+  header: X-Auth-Token
+  secret: legoSecret
+  expiration: 604800
+  auth-path: /auth
+  md5Key: randomKey
+  SSO_CREDENTIALS: N/A
+
+rest:
+  sign-open: true #签名机制是否开启(true或false)
+  sso-open: true #单点登录是否开启（true或false）
+
+storage:
+  enable: qiniu
+  qiniu:
+    accessKey: wffdJF06OfYlaNGtD9VOghhWT5jR8YatZT9qpt5d
+    secretKey: 9JOJUm30ynjBgzFZWP6_SJ6_JIud1-I9RSxxqr5i
+    bucket: legao
+    zone: zone0
+    domain: http://img.thankoil.com/
+
+wechat:
+  pay:
+    appId: wxe184298fc71118e4                                   #公众号AppId
+    mchId: 1497713532                                           #商户ID
+    mchKey: 883RBKAL9qC1G4erU3AfRCNPMds7CiVS                    #商户密钥
+    keyPath: /usr/local/SBA/legao_backend/apiclient_cert.p12    #证书
+    validTime: 15                                               #订单支付有效期（单位:分钟）
+    payNotifyUrl: http://api.thankoil.com/appOrder/resultnotify                       #支付通知地址
+    refundNotifyUrl: http://api.thankoil.com/orderRefund/resultnotify                  #退款通知地址
+    useSandboxEnv: false                                        #是否使用沙盒环境
+    useTestPay: false                                            #是否使用测试支付金额，支付1分钱，不使用沙盒环境时才起作用
+logistics:
+  autoConfirmTime: 1440               #物流自动确认时间（单位：分钟）
+
+schedulePool:
+  corePoolSize: 3
+  maximumPoolSize: 20
+  keepAliveTime: 60
+
+qrcode:
+  prev: http://www.thankoil.com/home

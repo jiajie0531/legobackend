@@ -1,0 +1,103 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: logictics
+      password: logictics
+      url: jdbc:mysql://47.96.17.187:3306/logictics?useUnicode=true&characterEncoding=utf8&useSSL=false
+
+      initial-size: 3
+      max-active: 20
+      min-idle: 3
+      max-wait: 150000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 600000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filter:
+        stat:
+          slow-sql-millis: 2000
+        wall:
+          enabled: true
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: update
+    show-sql: true
+  #设置文件上传大小
+
+  http:
+    multipart:
+      max-request-size: 10Mb
+      max-file-size: 10Mb
+
+server:
+    port: 9001
+
+notice:
+  server:
+    url: https://api.mysubmail.com
+  message:
+    appKey: 14552
+    secret: ac4aa586537499a7e2df1fcc1fde10fb
+    expireTime: 15    #验证码过期时间，单位为分钟
+
+
+
+jwt:
+  header: X-Auth-Token
+  secret: legoSecret
+  expiration: 604800
+  auth-path: /auth
+  md5Key: randomKey
+  SSO_CREDENTIALS: N/A
+
+
+rest:
+  sign-open: false #签名机制是否开启(true或false)
+  sso-open: true #单点登录是否开启（true或false）
+
+storage:
+  enable: qiniu
+  qiniu:
+    accessKey: EBGBUn113Ch-bzxXx_4p8i6oSrJnBGitPgn-dX7f
+    secretKey: eoKJ3JETyT4f60mhoyWrOjPzfhIOK_KTxGfxmONz
+    bucket: legao
+    zone: zone0
+    domain: http://img.xizhiming.top/
+  ftp:
+    server:
+      hostname: 47.94.19.204
+      username: ftpuser
+      password: gm123456
+      load-dir: http://47.94.19.204:9090/
+wechat:
+  pay:
+    appId: wxe184298fc71118e4                                   #公众号AppId
+    mchId: 1497713532                                           #商户ID
+    mchKey: 883RBKAL9qC1G4erU3AfRCNPMds7CiVS                    #商户密钥
+    keyPath: /usr/local/SBA/legao_backend/apiclient_cert.p12    #证书
+    validTime: 15                                               #订单支付有效期（单位:分钟）
+    payNotifyUrl: http://47.96.17.187:9001/appOrder/resultnotify                         #支付通知地址
+    refundNotifyUrl: http://47.96.17.187:9001/orderRefund/resultnotify                  #退款通知地址
+    useSandboxEnv: false                                        #是否使用沙盒环境
+    useTestPay: true                                            #是否使用测试支付金额，支付1分钱，不使用沙盒环境时才起作用
+    useDevEnv: true                                             #是否使用本地开发环境，支付时不发起微信支付
+    sanboxEnvPayFee: 1.01                                       #沙盒环境支付金额
+logistics:
+  autoConfirmTime: 2               #物流自动确认时间（单位：分钟）
+
+schedulePool:
+  corePoolSize: 3
+  maximumPoolSize: 20
+  keepAliveTime: 60
+
+qrcode:
+  prev: http://wx.xizhiming.top/home
+
